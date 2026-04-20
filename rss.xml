@@ -5,7 +5,7 @@
   <link>https://collating.info</link>
   <description>collating.info</description>
   <language>en-us</language>
-  <lastBuildDate>Mon, 20 Apr 2026 12:50:00 GMT</lastBuildDate>
+  <lastBuildDate>Mon, 20 Apr 2026 13:30:00 GMT</lastBuildDate>
   <atom:link href="https://collating.info/rss.xml" rel="self" type="application/rss+xml" />
   
     <item>
@@ -14,7 +14,7 @@
       <guid isPermaLink="false">99</guid>
       <pubDate>Wed, 18 Mar 2026 12:56:27 GMT</pubDate>
       <category><![CDATA[featured]]></category>
-      <description><![CDATA[A highly curated collection of my most utilized resources, design tools, and editorial inspirations. ]]></description>
+      <description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></description>
     </item>
     <item>
       <title><![CDATA[My Favorite Apps]]></title>
@@ -22,7 +22,7 @@
       <guid isPermaLink="false">14</guid>
       <pubDate>Wed, 18 Mar 2026 12:56:27 GMT</pubDate>
       <category><![CDATA[electronics]]></category>
-      <description><![CDATA[A look at the applications that power my modern workflow, from minimalist writing tools to a high-end research stack. ]]></description>
+      <description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></description>
     </item>
     <item>
       <title><![CDATA[Fantasy Sports Resources]]></title>
@@ -30,7 +30,7 @@
       <guid isPermaLink="false">7</guid>
       <pubDate>Wed, 18 Mar 2026 01:36:00 GMT</pubDate>
       <category><![CDATA[sports]]></category>
-      <description><![CDATA[A curated collection of the best resources for modern fantasy sports fans. ]]></description>
+      <description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></description>
     </item>
     <item>
       <title><![CDATA[Pickleball]]></title>
@@ -38,31 +38,7 @@
       <guid isPermaLink="false">8</guid>
       <pubDate>Wed, 18 Mar 2026 01:36:00 GMT</pubDate>
       <category><![CDATA[sports]]></category>
-      <description><![CDATA[Pickleball is more than just a trend; it is a cultural shift in how we approach community sports. ]]></description>
-    </item>
-    <item>
-      <title><![CDATA[The Art of Collating]]></title>
-      <link>https://collating.info/#the-art-of-collating</link>
-      <guid isPermaLink="false">1</guid>
-      <pubDate>Mon, 16 Mar 2026 22:11:58 GMT</pubDate>
-      <category><![CDATA[general]]></category>
-      <description><![CDATA[Collating is more than just gathering; it is the deliberate act of organizing information to reveal new insights. ]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Exploring California through Photography]]></title>
-      <link>https://collating.info/#exploring-california-through-photography</link>
-      <guid isPermaLink="false">2</guid>
-      <pubDate>Mon, 16 Mar 2026 22:11:58 GMT</pubDate>
-      <category><![CDATA[general]]></category>
-      <description><![CDATA[California offers a diverse landscape for artists and photographers. From the misty coastlines of the north to the arid deserts of the south.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Design Systems in Modern Web]]></title>
-      <link>https://collating.info/#design-systems-in-modern-web</link>
-      <guid isPermaLink="false">3</guid>
-      <pubDate>Mon, 16 Mar 2026 22:11:58 GMT</pubDate>
-      <category><![CDATA[general]]></category>
-      <description><![CDATA[A good design system is like a well-tended garden. It provides structure while allowing for organic growth.]]></description>
+      <description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></description>
     </item>
 </channel>
 </rss>
