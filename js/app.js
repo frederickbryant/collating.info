@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLiquidBackground();
     initMarquee(); // New Dynamic Marquee
     initSmallLoaderLogo();
+    initRollingLinks();
     initCursor(); 
     initTheme();
     initCategories();
@@ -740,17 +741,22 @@ function initScrollAnimations() {
     });
 }
 
-function initCategories() {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => filterContent(link.dataset.category));
-        const text = link.textContent;
+function initRollingLinks() {
+    document.querySelectorAll('.nav-link, .rolling-link').forEach(link => {
+        const content = link.innerHTML;
         link.innerHTML = `<div class="nav-link-rolling overflow-hidden relative" style="height: 1.2em; line-height: 1.2em;">
-                <span class="nav-link-inner block">${text}</span>
-                <span class="nav-link-inner absolute top-full left-0 block w-full whitespace-nowrap">${text}</span>
+                <div class="nav-link-inner block flex items-center gap-2">${content}</div>
+                <div class="nav-link-inner absolute top-full left-0 block w-full whitespace-nowrap flex items-center gap-2">${content}</div>
             </div>`;
         const inners = link.querySelectorAll('.nav-link-inner');
         link.addEventListener('mouseenter', () => gsap.to(inners, { y: "-100%", duration: 0.6, stagger: 0.05, ease: "expo.out" }));
         link.addEventListener('mouseleave', () => gsap.to(inners, { y: "0%", duration: 0.6, stagger: 0.05, ease: "expo.out" }));
+    });
+}
+
+function initCategories() {
+    document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
+        link.addEventListener('click', () => filterContent(link.dataset.category));
     });
 
     // Mobile Menu System (Push-Down Architecture)
