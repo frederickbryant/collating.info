@@ -20,7 +20,7 @@
 }
 
 .dark-mode {
-  --background: #000000;
+  --background: #0a0a0b;
   --foreground: #f5f5f7;
   --accent: #f5f5f7;
   --text-muted: #86868b;
@@ -31,7 +31,7 @@
   --card-shadow: 0 12px 64px rgba(0, 0, 0, 0.8);
 
   /* Liquid Mesh Colors - Dark Mode (Linear Ramp) */
-  --blob-1: #000000; 
+  --blob-1: #0a0a0b; 
   --blob-2: #241b39; 
   --blob-3: #483673; 
   --blob-4: #6c51ac; 
@@ -143,7 +143,7 @@ body {
 }
 
 .dark-mode #liquid-reveal-overlay {
-  background: #000;
+  background: #0a0a0b;
 }
 
 /* --- Logo & Marquee --- */
