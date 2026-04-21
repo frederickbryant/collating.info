@@ -10,7 +10,9 @@ let state = {
     filteredPosts: [],
     currentCategory: 'all',
     flipState: null,
-    interfaceRevealed: false
+    interfaceRevealed: false,
+    isMenuOpen: false,
+    isSearchActive: false
 };
 
 // --- Initialization ---
@@ -36,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMarquee(); // New Dynamic Marquee
     initSmallLoaderLogo();
     initRollingLinks();
+    initSmartNavbar();
     initCursor(); 
     initTheme();
     initCategories();
@@ -770,18 +773,17 @@ function initCategories() {
     const menuBtn = document.getElementById('menu-trigger');
     const mobileDrawer = document.getElementById('mobile-drawer');
     const mainContent = document.getElementById('main-content');
-    let isMenuOpen = false;
 
     const toggleMenu = (forceClose = false) => {
         const menuIconOpen = document.getElementById('menu-icon-open');
         const menuIconClose = document.getElementById('menu-icon-close');
         
-        isMenuOpen = forceClose ? false : !isMenuOpen;
+        state.isMenuOpen = forceClose ? false : !state.isMenuOpen;
         
         // Stabilize icons
         gsap.killTweensOf([menuIconOpen, menuIconClose]);
 
-        if (isMenuOpen) {
+        if (state.isMenuOpen) {
             // Expansion
             gsap.to(mobileDrawer, { height: "auto", opacity: 1, duration: 0.4, ease: "apple-glass" });
             gsap.to(mainContent, { y: 340, duration: 0.4, ease: "apple-glass" }); // Shift content down
@@ -803,10 +805,9 @@ function initCategories() {
     const contentWrapper = document.getElementById('nav-content-wrapper');
     const searchUI = document.getElementById('nav-search-ui');
     const searchInput = document.getElementById('search-input');
-    let isSearchActive = false;
     const toggleSearch = (forceClose = false) => {
-        if (isMenuOpen) toggleMenu(true); 
-        isSearchActive = forceClose ? false : !isSearchActive;
+        if (state.isMenuOpen) toggleMenu(true); 
+        state.isSearchActive = forceClose ? false : !state.isSearchActive;
         
         const searchUI = document.getElementById('nav-search-ui');
         const iconOpen = document.getElementById('search-icon-open');
@@ -816,7 +817,7 @@ function initCategories() {
         gsap.killTweensOf([contentWrapper, searchUI, iconOpen, iconClose, searchBtn]);
         gsap.set(searchBtn, { y: 0 }); 
 
-        if (isSearchActive) {
+        if (state.isSearchActive) {
             // Scroll to top so search results are at the start
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -864,11 +865,69 @@ function initCategories() {
 
     searchBtn?.addEventListener('click', () => toggleSearch());
     
+    // Add Esc key listener for closing search
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && state.isSearchActive) toggleSearch(true);
+    });
+}
+
+function initSmartNavbar() {
+    const navbar = document.getElementById('navbar-container');
+    if (!navbar) return;
+
+    let lastScrollY = window.pageYOffset;
+    let isHidden = false;
+
+    window.addEventListener('scroll', () => {
+        // Only run on mobile/tablet (less than 1024px)
+        if (window.innerWidth >= 1024) {
+            gsap.to(navbar, { y: 0, duration: 0.4, ease: "apple-glass", overwrite: true });
+            return;
+        }
+
+        const currentScrollY = window.pageYOffset;
+        const delta = currentScrollY - lastScrollY;
+        
+        // Show immediately at the top
+        if (currentScrollY < 80) {
+            if (isHidden) {
+                gsap.to(navbar, { y: 0, duration: 0.4, ease: "apple-glass", overwrite: true });
+                isHidden = false;
+            }
+            lastScrollY = currentScrollY;
+            return;
+        }
+
+        // Don't hide if menu or search is active
+        if (state.isMenuOpen || state.isSearchActive) {
+            gsap.to(navbar, { y: 0, duration: 0.4, ease: "apple-glass", overwrite: true });
+            isHidden = false;
+            lastScrollY = currentScrollY;
+            return;
+        }
+
+        // Ignore small scroll fluctuations
+        if (Math.abs(delta) < 10) return;
+
+        if (delta > 0 && !isHidden) {
+            // Scrolling down - Hide
+            gsap.to(navbar, { y: "-120%", duration: 0.4, ease: "power2.in", overwrite: true });
+            isHidden = true;
+        } else if (delta < 0 && isHidden) {
+            // Scrolling up - Show
+            gsap.to(navbar, { y: 0, duration: 0.4, ease: "apple-glass", overwrite: true });
+            isHidden = false;
+        }
+
+        lastScrollY = currentScrollY;
+    }, { passive: true });
+}
+
     // Categorization Integration
     document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
         link.addEventListener('click', () => {
             filterContent(link.dataset.category);
-            if (isMenuOpen) toggleMenu(true);
+            if (state.isMenuOpen) toggleMenu(true);
         });
     });
     
