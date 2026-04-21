@@ -817,6 +817,9 @@ function initCategories() {
         gsap.set(searchBtn, { y: 0 }); 
 
         if (isSearchActive) {
+            // Immediate focus for mobile keyboard compatibility
+            searchInput.focus();
+
             // Roll Out Branding, Links & Theme (All nested in wrapper)
             gsap.to(contentWrapper, { 
                 y: -40, opacity: 0, duration: 0.4, ease: "apple-glass",
@@ -827,7 +830,6 @@ function initCategories() {
                 y: 0, opacity: 1, duration: 0.5, delay: 0.1, ease: "apple-glass", 
                 onStart: () => {
                     searchUI.style.pointerEvents = 'auto';
-                    searchInput.focus();
                 }
             });
             // Pure Icon Rotation (Locking Y)
