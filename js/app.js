@@ -817,6 +817,9 @@ function initCategories() {
         gsap.set(searchBtn, { y: 0 }); 
 
         if (isSearchActive) {
+            // Scroll to top so search results are at the start
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
             // Immediate focus for mobile keyboard compatibility
             searchInput.focus();
 
