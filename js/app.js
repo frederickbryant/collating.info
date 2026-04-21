@@ -869,6 +869,30 @@ function initCategories() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && state.isSearchActive) toggleSearch(true);
     });
+
+    // Categorization Integration
+    document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
+        link.addEventListener('click', () => {
+            filterContent(link.dataset.category);
+            if (state.isMenuOpen) toggleMenu(true);
+        });
+    });
+    
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        state.filteredPosts = query.length > 0 
+            ? state.posts.filter(p => p.title.toLowerCase().includes(query) || p.content.toLowerCase().includes(query))
+            : [...state.posts];
+        
+        renderPosts();
+        initScrollAnimations();
+        ScrollTrigger.refresh();
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggleSearch(true);
+        if (e.key === 'Enter') searchInput.blur();
+    });
 }
 
 function initSmartNavbar() {
@@ -921,31 +945,6 @@ function initSmartNavbar() {
 
         lastScrollY = currentScrollY;
     }, { passive: true });
-}
-
-    // Categorization Integration
-    document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
-        link.addEventListener('click', () => {
-            filterContent(link.dataset.category);
-            if (state.isMenuOpen) toggleMenu(true);
-        });
-    });
-    
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        state.filteredPosts = query.length > 0 
-            ? state.posts.filter(p => p.title.toLowerCase().includes(query) || p.content.toLowerCase().includes(query))
-            : [...state.posts];
-        
-        renderPosts();
-        initScrollAnimations();
-        ScrollTrigger.refresh();
-    });
-
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') toggleSearch(true);
-        if (e.key === 'Enter') searchInput.blur();
-    });
 }
 
 function initTheme() {
