@@ -50,13 +50,20 @@ function initLoader() {
     const loader = document.getElementById('loader');
     if (!loader) return;
     
-    // 1. Initialize Fancy Main Loader Animation (Scale: 8x)
+    // 1. Initialize Fancy Main Loader Animation (Dynamic Responsive Scale)
     const container = document.getElementById('loader-pillars');
     if (container) {
-        const scale = 8;
+        // Calculate responsive scale based on screen width (Unit width is 62px)
+        const targetWidth = Math.min(500, window.innerWidth * 0.85);
+        const scale = targetWidth / 62;
+        
         const thickness = CONFIG.LOGO_THICKNESS * scale;
         const gap = CONFIG.LOGO_GAP * scale;
         const length = CONFIG.LOGO_LENGTH * scale;
+
+        // Set container size to match the scaled pillars
+        container.style.width = targetWidth + 'px';
+        container.style.height = length + 'px';
 
         const patterns = [
             [0, 5, 5, 2, 2, 0, 0], 
