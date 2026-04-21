@@ -785,8 +785,9 @@ function initCategories() {
 
         if (state.isMenuOpen) {
             // Expansion
-            gsap.to(mobileDrawer, { height: "auto", opacity: 1, duration: 0.4, ease: "apple-glass" });
-            gsap.to(mainContent, { y: 340, duration: 0.4, ease: "apple-glass" }); // Shift content down
+            const drawerHeight = mobileDrawer.scrollHeight;
+            gsap.to(mobileDrawer, { height: drawerHeight, opacity: 1, duration: 0.4, ease: "apple-glass" });
+            gsap.to(mainContent, { y: drawerHeight, duration: 0.4, ease: "apple-glass" }); // Shift content down by exact drawer height
             gsap.to(menuIconOpen, { rotation: 90, opacity: 0, duration: 0.3, transformOrigin: "50% 50%", ease: "apple-glass" });
             gsap.fromTo(menuIconClose, { rotation: -90, opacity: 0 }, { rotation: 0, opacity: 1, duration: 0.3, transformOrigin: "50% 50%", ease: "apple-glass" });
         } else {
